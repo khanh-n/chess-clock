@@ -1,1 +1,50 @@
-/* You can add global styles to this file, and also import other style files */
+@use '~@angular/material' as mat;
+@import 'material-icons/iconfont/material-icons.css';
+@import 'assets/fonts/lcdbold/font.css';
+@import 'assets/scss/_colors.scss';
+html, body {
+	height: 100%;
+	background-color: $primary-bg;
+	color: $primary-fg;
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100%}
+
+.controls {
+	margin: 2rem;
+	font-size: 2rem;
+	text-align: center;
+	margin-bottom: 10px;
+
+	.mat-icon {
+		height: auto;
+		width: auto;
+	}
+	.control {
+		font-size: 2rem;
+	}
+	.control-btn {
+		padding: 0.25rem 1rem;
+		margin: 0.5rem;
+	}
+}
+
+.clock-container {
+	text-align: center;
+
+	.clock {
+		font-family: 'LCDBOLD';
+		font-size: 9.21rem;
+		min-height: 100%;
+		height: 100%;
+		padding-top: 5rem;
+		padding-bottom: 5rem;
+		cursor: pointer;
+		background-color: lighten($primary-bg, 10%);
+		flex: 1;
+		// &:first-child {border-right: 1px solid #fff;}
+	}
+
+	.clock.paused { color: $primary-fg; }
+	.clock.active { color: $highlight; }
+
+}
