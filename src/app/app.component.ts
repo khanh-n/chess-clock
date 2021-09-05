@@ -1,4 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { keyframes } from '@angular/animations';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdown';
 
 @Component({
@@ -12,6 +13,26 @@ export class AppComponent {
 
 	@ViewChild('cd1', {static: false}) private cd1!: CountdownComponent;
 	@ViewChild('cd2', {static: false}) private cd2!: CountdownComponent;
+	@HostListener('document:keypress', ['$event'])
+	handleKeyboardEvent(event: KeyboardEvent) {
+		console.log(event);
+
+		if (event.key == '1') {
+			this.onBtnOne();
+		}
+
+		if (event.key == '2') {
+			this.onBtnTwo();
+		}
+
+		if (event.key == 'r' || event.key == 'R') {
+			this.onReset();
+		}
+
+		if (event.key == 'p' || event.key == 'P' || event.key == ' ') {
+			this.onPause();
+		}
+	}
 
 	public config1: CountdownConfig = {
 		demand: true,
@@ -59,7 +80,6 @@ export class AppComponent {
 		this.cd2.restart();
 		this.cd1State = "paused";
 		this.cd2State = "paused";
-
 	}
 
 	handleEvent(event: CountdownEvent) {

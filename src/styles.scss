@@ -35,12 +35,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 		font-family: 'LCDBOLD';
 		font-size: 9.21rem;
 		min-height: 100%;
-		padding-top: 5rem;
-		padding-bottom: 5rem;
+		padding-top: 10rem;
 		cursor: pointer;
 		background-color: lighten($primary-bg, 10%);
-		flex: 1;
-		vertical-align: middle;
 		// &:first-child {border-right: 1px solid #fff;}
 	}
 
