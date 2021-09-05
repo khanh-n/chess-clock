@@ -45,3 +45,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 	.clock.active { color: $highlight; }
 
 }
+
+@media only screen and (max-width: 480px) {
+	.clock-container {
+		.clock {
+			font-size: 4.21rem;
+		}
+	}
+}
