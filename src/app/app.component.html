@@ -26,14 +26,14 @@
 
 	</div>
 
-	<div class="clock-container" fxLayout="row" fxLayoutAlign="space-around stretch" fxFlex="70vh">
+	<div class="clock-container" fxLayout="row" fxLayoutAlign="space-around stretch" fxFlex="60vh">
 
 		<div id="clock1" class="clock {{cd1State}}" (click)="onBtnOne()" fxFlex="49">
 			<countdown #cd1 [config]="config1" (event)="handleEvent($event)"></countdown>
 		</div>
 
 
-		<div id="clock2" class="clock {{cd2State}}" (click)="onBtnTwo()" fxFlex=49>
+		<div id="clock2" class="clock {{cd2State}}" (click)="onBtnTwo()" fxFlex="49">
 			<countdown #cd2 [config]="config2" (event)="handleEvent($event)"></countdown>
 		</div>
 	</div>
