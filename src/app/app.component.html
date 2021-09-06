@@ -1,16 +1,39 @@
 <div class="content" role="main" fxLayout="column">
 
-	<div class="controls" fxFlex="20vh" fxLayout="column" fxLayoutAlign="center center">
+	<div class="controls" fxFlex="21vh" fxLayout="column" fxLayoutAlign="center center">
 
-		<div fxLayout="row">
+		<div class="time-presets" fxLayout="row">
+			<button (click)="onSetTime(60)" class="control-btn">
+				<span class="control">1+0</span>
+			</button>
+			<button (click)="onSetTime(120, 1)" class="control-btn">
+				<span class="control">2+1</span>
+			</button>
+			<button (click)="onSetTime(180)" class="control-btn">
+				<span class="control">3+0</span>
+			</button>
+			<button (click)="onSetTime(180, 2)" class="control-btn">
+				<span class="control">3+2</span>
+			</button>
 			<button (click)="onSetTime(300)" class="control-btn">
-				<span class="control">5</span>
+				<span class="control">5+0</span>
+			</button>
+		</div>
+		<div class="time-presets" fxLayout="row">
+			<button (click)="onSetTime(300, 3)" class="control-btn">
+				<span class="control">5+3</span>
 			</button>
 			<button (click)="onSetTime(600)" class="control-btn">
-				<span class="control">10</span>
+				<span class="control">10+0</span>
 			</button>
 			<button (click)="onSetTime(900)" class="control-btn">
-				<span class="control">15</span>
+				<span class="control">15+0</span>
+			</button>
+			<button (click)="onSetTime(900, 10)" class="control-btn">
+				<span class="control">15+10</span>
+			</button>
+			<button (click)="onSetTime(1800)" class="control-btn">
+				<span class="control">30+0</span>
 			</button>
 		</div>
 
@@ -23,19 +46,23 @@
 				<mat-icon aria-hidden="false" aria-label="reset" class="control">pause</mat-icon>
 			</button>
 		</div>
-
 	</div>
 
 	<div class="clock-container" fxLayout="row" fxLayoutAlign="space-around stretch" fxFlex="60vh">
 
-		<div id="clock1" class="clock {{cd1State}}" (click)="onBtnOne()" fxFlex="49">
+		<div id="clock1" class="clock {{cd1State}}" (click)="onBtnOne()" fxFlex="49.5">
 			<countdown #cd1 [config]="config1" (event)="handleEvent($event)"></countdown>
 		</div>
 
 
-		<div id="clock2" class="clock {{cd2State}}" (click)="onBtnTwo()" fxFlex="49">
+		<div id="clock2" class="clock {{cd2State}}" (click)="onBtnTwo()" fxFlex="49.5">
 			<countdown #cd2 [config]="config2" (event)="handleEvent($event)"></countdown>
 		</div>
 	</div>
+
+	<div fxLayout="row" class="moves" fxLayoutAlign="center center">
+		<strong>Moves: {{ moveCount }}</strong>
+	</div>
+
 
 </div>

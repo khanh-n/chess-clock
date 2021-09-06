@@ -15,6 +15,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 	text-align: center;
 	margin-bottom: 10px;
 
+	.time-presets button > span {
+		font-size: 18px;
+	}
 	.mat-icon {
 		height: auto;
 		width: auto;
@@ -26,6 +29,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 		padding: 0.25rem 1rem;
 		margin: 0.5rem;
 	}
+
+}
+.moves {
+	font-family: 'LCDBOLD';
+	font-size: 2rem;
+	padding-top: 2rem;
 }
 
 .clock-container {
@@ -41,7 +50,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 		// &:first-child {border-right: 1px solid #fff;}
 	}
 
-	.clock.paused { color: $primary-fg; }
-	.clock.active { color: $highlight; }
+	.clock.paused {
+		background-color: lighten($primary-bg, 10%);
+		color: $primary-fg;
+	}
+	.clock.active {
+		background-color: lighten($primary-bg, 15%);
+		color: $highlight;
+	}
 
+}
+
+@media only screen and (max-width: 480px) {
+	.clock-container {
+		.clock {
+			font-size: 4.21rem;
+		}
+	}
+
+	.controls {
+		.time-presets button > span {
+			font-size: 16px;
+		}
+		.control-btn {
+			padding: 0.25rem 1rem;
+			margin: 0.5rem 0.25rem;
+		}
+
+	}
 }
