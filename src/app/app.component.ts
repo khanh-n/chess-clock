@@ -53,8 +53,6 @@ export class AppComponent {
 
 
 	onBtnOne() {
-		this.cd1State = "paused";
-		this.cd2State = "active";
 		this.cd1.pause();
 		this.cd2.resume();
 
@@ -66,13 +64,16 @@ export class AppComponent {
 		if (this.isFirstClick) {
 			this.isFirstClick = false;
 		} else {
-			this.moveCount++;
+			if (this.cd1State == "active") {
+				this.moveCount++;
+			}
 		}
+
+		this.cd1State = "paused";
+		this.cd2State = "active";
 	}
 
 	onBtnTwo() {
-		this.cd2State = "paused";
-		this.cd1State = "active";
 		this.cd2.pause();
 		this.cd1.resume();
 
@@ -85,8 +86,14 @@ export class AppComponent {
 		if (this.isFirstClick) {
 			this.isFirstClick = false;
 		} else {
-			this.moveCount++;
+			if (this.cd2State == "active") {
+				this.moveCount++;
+			}
 		}
+
+		this.cd2State = "paused";
+		this.cd1State = "active";
+
 	}
 
 	onSetTime(time: number, increment: number = 0) {
