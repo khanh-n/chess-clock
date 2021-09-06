@@ -56,16 +56,16 @@ export class AppComponent {
 		this.cd1.pause();
 		this.cd2.resume();
 
-		if (this.increment != 0 && !this.isFirstClick) {
-			this.cd1.config.leftTime = this.cd1.left/1000 + this.increment;
-			this.cd1.restart();
-		}
-
 		if (this.isFirstClick) {
 			this.isFirstClick = false;
 		} else {
 			if (this.cd1State == "active") {
 				this.moveCount++;
+
+				if (this.increment != 0) {
+					this.cd1.config.leftTime = this.cd1.left/1000 + this.increment;
+					this.cd1.restart();
+				}
 			}
 		}
 
@@ -77,17 +77,16 @@ export class AppComponent {
 		this.cd2.pause();
 		this.cd1.resume();
 
-
-		if (this.increment != 0 && !this.isFirstClick) {
-			this.cd2.config.leftTime = this.cd2.left/1000 + this.increment;
-			this.cd2.restart();
-		}
-
 		if (this.isFirstClick) {
 			this.isFirstClick = false;
 		} else {
 			if (this.cd2State == "active") {
 				this.moveCount++;
+
+				if (this.increment != 0) {
+					this.cd2.config.leftTime = this.cd2.left/1000 + this.increment;
+					this.cd2.restart();
+				}
 			}
 		}
 
