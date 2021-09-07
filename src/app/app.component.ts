@@ -51,6 +51,10 @@ export class AppComponent {
 		if (event.key == 'p' || event.key == 'P' || event.key == ' ') {
 			this.onPause();
 		}
+
+		if (event.key == 'm' || event.key == 'M') {
+			this.onCycleMode();
+		}
 	}
 
 	public config1: CountdownConfig = {
