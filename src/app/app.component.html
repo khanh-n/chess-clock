@@ -3,38 +3,11 @@
 	<div class="controls" fxFlex="25vh" fxLayout="column" fxLayoutAlign="center center">
 
 		<div class="time-presets" fxLayout="row">
-			<button (click)="onSetTime(60)" class="control-btn">
-				<span class="control">1+0</span>
-			</button>
-			<button (click)="onSetTime(120, 1)" class="control-btn">
-				<span class="control">2+1</span>
-			</button>
-			<button (click)="onSetTime(180)" class="control-btn">
-				<span class="control">3+0</span>
-			</button>
-			<button (click)="onSetTime(180, 2)" class="control-btn">
-				<span class="control">3+2</span>
-			</button>
-			<button (click)="onSetTime(300)" class="control-btn">
-				<span class="control">5+0</span>
-			</button>
-		</div>
-		<div class="time-presets" fxLayout="row">
-			<button (click)="onSetTime(300, 3)" class="control-btn">
-				<span class="control">5+3</span>
-			</button>
-			<button (click)="onSetTime(600)" class="control-btn">
-				<span class="control">10+0</span>
-			</button>
-			<button (click)="onSetTime(900)" class="control-btn">
-				<span class="control">15+0</span>
-			</button>
-			<button (click)="onSetTime(900, 10)" class="control-btn">
-				<span class="control">15+10</span>
-			</button>
-			<button (click)="onSetTime(1800)" class="control-btn">
-				<span class="control">30+0</span>
-			</button>
+			<div  *ngFor="let preset of presets">
+				<button (click)="onSetTime(preset.time, preset.inc, preset.name)" class="control-btn {{selectedPreset == preset.name ? 'active' : ''}}">
+					<span class="control">{{preset.name}}</span>
+				</button>
+			</div>
 		</div>
 
 		<div fxLayout="row">
