@@ -34,7 +34,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 		color: $primary-fg;
 		border: 1px solid $highlight;
 		border-radius: 15px;
-		padding: 0.25rem 1rem;
+		padding: 0.35rem 1rem 0.25rem;
 		margin: 0.5rem;
 		cursor: pointer;
 	}
@@ -91,9 +91,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 @media only screen and (max-width: 480px) {
 	.clock-container {
 		.clock {
-			font-size: 4.21rem;
-			padding-top: 2rem;
-			padding-bottom: 2rem;
+			font-size: 3.5rem;
+			padding-top: 2.5rem;
+			padding-bottom: 2.5rem;
 		}
 	}
 

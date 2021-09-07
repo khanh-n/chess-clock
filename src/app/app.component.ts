@@ -16,6 +16,19 @@ export class AppComponent {
 	public startingTimeLeft: number = 600;
 	public cd1State: string = "paused";
 	public cd2State: string = "paused";
+	public selectedPreset: string = "10+0";
+	public presets: Array<any> = [
+		{ "name": "1+0", "time": 60, "inc": 0 },
+		{ "name": "2+1", "time": 120, "inc": 1 },
+		{ "name": "3+0", "time": 180, "inc": 0 },
+		{ "name": "3+2", "time": 180, "inc": 2 },
+		{ "name": "5+0", "time": 300, "inc": 0 },
+		{ "name": "5+3", "time": 300, "inc": 3 },
+		{ "name": "10+0", "time": 600, "inc": 0 },
+		{ "name": "15+0", "time": 900, "inc": 0 },
+		{ "name": "15+10", "time": 900, "inc": 10 },
+		{ "name": "30+0", "time": 1800, "inc": 0 }
+	];
 
 	@ViewChild('cd1', {static: false}) private cd1!: CountdownComponent;
 	@ViewChild('cd2', {static: false}) private cd2!: CountdownComponent;
@@ -37,6 +50,10 @@ export class AppComponent {
 
 		if (event.key == 'p' || event.key == 'P' || event.key == ' ') {
 			this.onPause();
+		}
+
+		if (event.key == 'm' || event.key == 'M') {
+			this.onCycleMode();
 		}
 	}
 
@@ -95,11 +112,12 @@ export class AppComponent {
 
 	}
 
-	onSetTime(time: number, increment: number = 0) {
+	onSetTime(time: number, increment: number = 0, name: string = "custom") {
 		this.increment = increment;
 		this.cd1.config.leftTime = time;
 		this.cd2.config.leftTime = time;
 		this.startingTimeLeft = time;
+		this.selectedPreset = name;
 		this.onReset();
 	}
 
@@ -119,6 +137,15 @@ export class AppComponent {
 		this.cd2State = "paused";
 		this.isFirstClick = true;
 		this.moveCount = 0;
+	}
+
+	onCycleMode() {
+		var idx = this.presets.findIndex(p => p.name == this.selectedPreset) + 1;
+		if (idx >= this.presets.length) {
+			idx = 0;
+		}
+
+		this.onSetTime(this.presets[idx].time, this.presets[idx].inc, this.presets[idx].name);
 	}
 
 	handleEvent(event: CountdownEvent) {
