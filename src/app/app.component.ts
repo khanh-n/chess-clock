@@ -135,6 +135,15 @@ export class AppComponent {
 		this.moveCount = 0;
 	}
 
+	onCycleMode() {
+		var idx = this.presets.findIndex(p => p.name == this.selectedPreset) + 1;
+		if (idx >= this.presets.length) {
+			idx = 0;
+		}
+
+		this.onSetTime(this.presets[idx].time, this.presets[idx].inc, this.presets[idx].name);
+	}
+
 	handleEvent(event: CountdownEvent) {
 		console.log(event);
 	}
