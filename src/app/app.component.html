@@ -2,7 +2,7 @@
 
 	<div class="controls" fxFlex="25vh" fxLayout="column" fxLayoutAlign="center center">
 
-		<div class="time-presets" fxLayout="row">
+		<div class="time-presets" fxLayout="row wrap">
 			<div  *ngFor="let preset of presets">
 				<button (click)="onSetTime(preset.time, preset.inc, preset.name)" class="control-btn {{selectedPreset == preset.name ? 'active' : ''}}">
 					<span class="control">{{preset.name}}</span>
