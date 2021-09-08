@@ -1,7 +1,7 @@
 import { keyframes } from '@angular/animations';
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdown';
-
+import presetJson from '../assets/presets.json';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -17,18 +17,7 @@ export class AppComponent {
 	public cd1State: string = "paused";
 	public cd2State: string = "paused";
 	public selectedPreset: string = "10+0";
-	public presets: Array<any> = [
-		{ "name": "1+0", "time": 60, "inc": 0 },
-		{ "name": "2+1", "time": 120, "inc": 1 },
-		{ "name": "3+0", "time": 180, "inc": 0 },
-		{ "name": "3+2", "time": 180, "inc": 2 },
-		{ "name": "5+0", "time": 300, "inc": 0 },
-		{ "name": "5+3", "time": 300, "inc": 3 },
-		{ "name": "10+0", "time": 600, "inc": 0 },
-		{ "name": "15+0", "time": 900, "inc": 0 },
-		{ "name": "15+10", "time": 900, "inc": 10 },
-		{ "name": "30+0", "time": 1800, "inc": 0 }
-	];
+	public presets: Array<any> = JSON.parse(JSON.stringify(presetJson));
 
 	@ViewChild('cd1', {static: false}) private cd1!: CountdownComponent;
 	@ViewChild('cd2', {static: false}) private cd2!: CountdownComponent;
