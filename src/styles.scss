@@ -84,7 +84,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 	.increment {
 		position: absolute;
 		top: 36px;
-		left: 25px;
+		right: 25px;
 		font-size: 4rem;
 		opacity: 0.45;
 	}
@@ -100,7 +100,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 
 		.increment {
 			top: 15px;
-			left: 20px;
+			right: 20px;
 			font-size: 2rem;
 		}
 	}
@@ -115,7 +115,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 		}
 		.increment {
 			top: 5px;
-			left: 10px;
+			right: 10px;
 			font-size: 1rem;
 		}
 	}
