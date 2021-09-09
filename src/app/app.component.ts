@@ -10,7 +10,8 @@ import presetJson from '../assets/presets.json';
 
 export class AppComponent {
 	title = 'chess-clock';
-	public increment: number = 0;
+	public increment1: number = 0;
+	public increment2: number = 0;
 	public moveCount: number = 0;
 	public isFirstClick: boolean = true;
 	public startingTimeLeft: number = 600;
@@ -68,8 +69,8 @@ export class AppComponent {
 			if (this.cd1State == "active") {
 				this.moveCount++;
 
-				if (this.increment != 0) {
-					this.cd1.config.leftTime = this.cd1.left/1000 + this.increment;
+				if (this.increment1 != 0) {
+					this.cd1.config.leftTime = this.cd1.left/1000 + this.increment1;
 					this.cd1.restart();
 				}
 			}
@@ -89,8 +90,8 @@ export class AppComponent {
 			if (this.cd2State == "active") {
 				this.moveCount++;
 
-				if (this.increment != 0) {
-					this.cd2.config.leftTime = this.cd2.left/1000 + this.increment;
+				if (this.increment2 != 0) {
+					this.cd2.config.leftTime = this.cd2.left/1000 + this.increment2;
 					this.cd2.restart();
 				}
 			}
@@ -102,7 +103,8 @@ export class AppComponent {
 	}
 
 	onSetTime(time: number, increment: number = 0, name: string = "custom") {
-		this.increment = increment;
+		this.increment1 = increment;
+		this.increment2 = increment;
 		this.cd1.config.leftTime = time;
 		this.cd2.config.leftTime = time;
 		this.startingTimeLeft = time;

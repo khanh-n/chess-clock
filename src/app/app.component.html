@@ -14,25 +14,25 @@
 			<button (click)="onReset()" class="control-btn">
 				<mat-icon aria-hidden="false" aria-label="reset" class="control">refresh</mat-icon>
 			</button>
-
 			<button (click)="onPause()" class="control-btn">
-				<mat-icon aria-hidden="false" aria-label="reset" class="control">pause</mat-icon>
+				<mat-icon aria-hidden="false" aria-label="pause" class="control">pause</mat-icon>
 			</button>
-
-			<button (click)="onCycleMode()" class="control-btn">
+			<!-- <button (click)="onCycleMode()" class="control-btn">
 				<mat-icon aria-hidden="false" aria-label="reset" class="control">forward</mat-icon>
-			</button>
+			</button> -->
 		</div>
 	</div>
 
 	<div class="clock-container" fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="50vh">
 
 		<div id="clock1" class="clock {{cd1State}}" (click)="onBtnOne()" fxFlex="45">
+			<span class="increment" *ngIf="increment1 != 0">+{{increment1}}</span>
 			<countdown #cd1 [config]="config1" (event)="handleEvent($event)"></countdown>
 		</div>
 
 
 		<div id="clock2" class="clock {{cd2State}}" (click)="onBtnTwo()" fxFlex="45">
+			<span class="increment" *ngIf="increment2 != 0">+{{increment2}}</span>
 			<countdown #cd2 [config]="config2" (event)="handleEvent($event)"></countdown>
 		</div>
 	</div>
