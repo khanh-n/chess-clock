@@ -11,24 +11,30 @@ import presetJson from '../assets/presets.json';
 export class AppComponent {
 	title = 'chess-clock';
 
+	@ViewChild('cd1', {static: false}) private cd1!: CountdownComponent;
+	@ViewChild('cd2', {static: false}) private cd2!: CountdownComponent;
+
+
 	// Clock 1 Settings
-	public cd1State: string = "paused";
-	public increment1: number = 0;
-	public startingTimeLeft1: number = 600;
+	public clock1: any = {
+		state: "paused",
+		increment: 0,
+		startingTimeLeft: 600
+	}
 
 	// Clock 2 Settings
-	public cd2State: string = "paused";
-	public increment2: number = 0;
-	public startingTimeLeft2: number = 600;
+	public clock2: any = {
+		state: "paused",
+		increment: 0,
+		startingTimeLeft: 600
+	}
 
+	public dangerZone: number = 21;
 	public isSynced: boolean = true;
 	public isFirstClick: boolean = true;
 	public selectedPreset: string = "10+0";
 	public moveCount: number = 0;
 	public presets: Array<any> = JSON.parse(JSON.stringify(presetJson));
-
-	@ViewChild('cd1', {static: false}) private cd1!: CountdownComponent;
-	@ViewChild('cd2', {static: false}) private cd2!: CountdownComponent;
 
 	@HostListener('document:keypress', ['$event'])
 	handleKeyboardEvent(event: KeyboardEvent) {
@@ -57,66 +63,54 @@ export class AppComponent {
 
 	public config1: CountdownConfig = {
 		demand: true,
-		leftTime: this.startingTimeLeft1,
-		format: 'mm:ss'
+		leftTime: this.clock1.startingTimeLeft,
+		format: 'mm:ss',
+		notify: this.dangerZone - 1
 	}
 	public config2: CountdownConfig = {
 		demand: true,
-		leftTime: this.startingTimeLeft2,
-		format: 'mm:ss'
+		leftTime: this.clock2.startingTimeLeft,
+		format: 'mm:ss',
+		notify: this.dangerZone - 1
 	}
 
 
 	onBtnOne() {
-		this.cd1.pause();
-		this.cd2.resume();
-
-		if (this.isFirstClick) {
-			this.isFirstClick = false;
-		} else {
-			if (this.cd1State == "active") {
-				this.moveCount++;
-
-				if (this.increment1 != 0) {
-					this.cd1.config.leftTime = this.cd1.left/1000 + this.increment1;
-					this.cd1.restart();
-				}
-			}
-		}
-
-		this.cd1State = "paused";
-		this.cd2State = "active";
+		this.handleBtn(this.clock1, this.clock2, this.cd1, this.cd2);
 	}
 
 	onBtnTwo() {
-		this.cd2.pause();
-		this.cd1.resume();
+		this.handleBtn(this.clock2, this.clock1, this.cd2, this.cd1);
+	}
+
+	handleBtn(clock1: any, clock2: any, cd1: CountdownComponent, cd2: CountdownComponent) {
+		cd1.pause();
+		cd2.resume();
 
 		if (this.isFirstClick) {
 			this.isFirstClick = false;
 		} else {
-			if (this.cd2State == "active") {
+			if (clock1.state == "active") {
 				this.moveCount++;
 
-				if (this.increment2 != 0) {
-					this.cd2.config.leftTime = this.cd2.left/1000 + this.increment2;
-					this.cd2.restart();
+				if (clock1.increment != 0) {
+					cd1.config.leftTime = cd1.left/1000 + clock1.increment;
+					cd1.restart();
 				}
 			}
 		}
 
-		this.cd2State = "paused";
-		this.cd1State = "active";
-
+		clock1.state = "paused";
+		clock2.state = "active";
 	}
 
 	onSetTime(time: number, increment: number = 0, name: string = "custom") {
-		this.increment1 = increment;
-		this.increment2 = increment;
+		this.clock1.increment = increment;
+		this.clock2.increment = increment;
 		this.cd1.config.leftTime = time;
 		this.cd2.config.leftTime = time;
-		this.startingTimeLeft1 = time;
-		this.startingTimeLeft2 = time;
+		this.clock1.startingTimeLeft = time;
+		this.clock2.startingTimeLeft = time;
 		this.selectedPreset = name;
 		this.onReset();
 	}
@@ -124,17 +118,17 @@ export class AppComponent {
 	onPause() {
 		this.cd1.pause();
 		this.cd2.pause();
-		this.cd1State = "paused";
-		this.cd2State = "paused";
+		this.clock1.state = "paused";
+		this.clock2.state = "paused";
 	}
 
 	onReset() {
-		this.cd1.config.leftTime = this.startingTimeLeft1;
-		this.cd2.config.leftTime = this.startingTimeLeft2;
+		this.cd1.config.leftTime = this.clock1.startingTimeLeft;
+		this.cd2.config.leftTime = this.clock2.startingTimeLeft;
 		this.cd1.restart();
 		this.cd2.restart();
-		this.cd1State = "paused";
-		this.cd2State = "paused";
+		this.clock1.state = "paused";
+		this.clock2.state = "paused";
 		this.isFirstClick = true;
 		this.moveCount = 0;
 	}
@@ -150,6 +144,10 @@ export class AppComponent {
 
 	handleEvent(event: CountdownEvent) {
 		console.log(event);
+
+		if (event.action === 'notify') {
+
+		}
 	}
 }
 
