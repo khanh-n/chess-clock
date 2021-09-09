@@ -10,18 +10,26 @@ import presetJson from '../assets/presets.json';
 
 export class AppComponent {
 	title = 'chess-clock';
-	public increment1: number = 0;
-	public increment2: number = 0;
-	public moveCount: number = 0;
-	public isFirstClick: boolean = true;
-	public startingTimeLeft: number = 600;
+
+	// Clock 1 Settings
 	public cd1State: string = "paused";
+	public increment1: number = 0;
+	public startingTimeLeft1: number = 600;
+
+	// Clock 2 Settings
 	public cd2State: string = "paused";
+	public increment2: number = 0;
+	public startingTimeLeft2: number = 600;
+
+	public isSynced: boolean = true;
+	public isFirstClick: boolean = true;
 	public selectedPreset: string = "10+0";
+	public moveCount: number = 0;
 	public presets: Array<any> = JSON.parse(JSON.stringify(presetJson));
 
 	@ViewChild('cd1', {static: false}) private cd1!: CountdownComponent;
 	@ViewChild('cd2', {static: false}) private cd2!: CountdownComponent;
+
 	@HostListener('document:keypress', ['$event'])
 	handleKeyboardEvent(event: KeyboardEvent) {
 		console.log(event);
@@ -49,12 +57,12 @@ export class AppComponent {
 
 	public config1: CountdownConfig = {
 		demand: true,
-		leftTime: 600,
+		leftTime: this.startingTimeLeft1,
 		format: 'mm:ss'
 	}
 	public config2: CountdownConfig = {
 		demand: true,
-		leftTime: 600,
+		leftTime: this.startingTimeLeft2,
 		format: 'mm:ss'
 	}
 
@@ -107,7 +115,8 @@ export class AppComponent {
 		this.increment2 = increment;
 		this.cd1.config.leftTime = time;
 		this.cd2.config.leftTime = time;
-		this.startingTimeLeft = time;
+		this.startingTimeLeft1 = time;
+		this.startingTimeLeft2 = time;
 		this.selectedPreset = name;
 		this.onReset();
 	}
@@ -120,8 +129,8 @@ export class AppComponent {
 	}
 
 	onReset() {
-		this.cd1.config.leftTime = this.startingTimeLeft;
-		this.cd2.config.leftTime = this.startingTimeLeft;
+		this.cd1.config.leftTime = this.startingTimeLeft1;
+		this.cd2.config.leftTime = this.startingTimeLeft2;
 		this.cd1.restart();
 		this.cd2.restart();
 		this.cd1State = "paused";
