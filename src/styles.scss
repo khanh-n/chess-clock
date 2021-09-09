@@ -77,6 +77,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 		color: $highlight;
 	}
 
+	.clock.active.danger {
+		color: $danger;
+	}
+
 	.increment {
 		position: absolute;
 		top: 36px;
