@@ -55,6 +55,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 	text-align: center;
 
 	.clock {
+		position: relative;
 		font-family: 'LCDBOLD';
 		font-size: 9.21rem;
 		padding-top: 7.21rem;
@@ -76,6 +77,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 		color: $highlight;
 	}
 
+	.increment {
+		position: absolute;
+		top: 36px;
+		left: 25px;
+		font-size: 4rem;
+		opacity: 0.45;
+	}
 }
 
 @media only screen and (max-width: 769px) {
@@ -84,6 +92,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 			font-size: 6.21rem;
 			padding-top: 5rem;
 			padding-bottom: 5rem;
+		}
+
+		.increment {
+			position: absolute;
+			top: 36px;
+			left: 25px;
+			font-size: 2rem;
+			opacity: 0.45;
 		}
 	}
 }
@@ -94,6 +110,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 			font-size: 3.5rem;
 			padding-top: 2.5rem;
 			padding-bottom: 2.5rem;
+		}
+		.increment {
+			position: absolute;
+			top: 36px;
+			left: 25px;
+			font-size: 1rem;
+			opacity: 0.45;
 		}
 	}
 
