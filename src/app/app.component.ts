@@ -92,6 +92,7 @@ export class AppComponent {
 		cd2.resume();
 
 		if (this.isSoundEnabled && (clock1.state == "active" || this.isFirstClick)) {
+			this.clickSound.load();
 			this.clickSound.play();
 		}
 
@@ -154,6 +155,7 @@ export class AppComponent {
 		console.log(event);
 
 		if (event.action === 'done' && this.isSoundEnabled) {
+			this.alarmSound.load();
 			this.alarmSound.play();
 		}
 	}
