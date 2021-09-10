@@ -1,7 +1,8 @@
 @use '~@angular/material' as mat;
 @import 'material-icons/iconfont/material-icons.css';
 @import 'scss/fonts/lcdbold/font.css';
-@import 'scss/_colors.scss';
+@import 'scss/_colors';
+@import 'scss/forms';
 
 * {
 	transition: all 0.1s;
@@ -12,6 +13,17 @@ html, body {
 	color: $primary-fg;
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100%}
+
+a,
+a:visited {
+	color: $primary-fg;
+	text-decoration: none;
+}
+
+a:hover,
+a:active {
+	color: darken($primary-fg, 25%);
+}
 
 .controls {
 	margin: 2rem;
@@ -77,12 +89,36 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 		color: $highlight;
 	}
 
+	.clock.active.danger {
+		color: $danger;
+	}
+
 	.increment {
 		position: absolute;
 		top: 36px;
-		left: 25px;
+		right: 25px;
 		font-size: 4rem;
 		opacity: 0.45;
+	}
+}
+
+.sound-toggle {
+	margin-top: 0.5rem;
+	margin-left: 1rem;
+
+	span.slider:before {
+		content: "\e04f";
+		font-family: "Material Icons";
+		font-size: 34px;
+		bottom: -8px;
+		background-color: transparent;
+		color: $primary-fg;
+	}
+
+	input:checked+.slider:before {
+		content: "\e050";
+		font-size: 36px;
+		color: $primary-bg;
 	}
 }
 
@@ -96,7 +132,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 
 		.increment {
 			top: 15px;
-			left: 20px;
+			right: 20px;
 			font-size: 2rem;
 		}
 	}
@@ -111,7 +147,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 		}
 		.increment {
 			top: 5px;
-			left: 10px;
+			right: 10px;
 			font-size: 1rem;
 		}
 	}
@@ -126,4 +162,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 		}
 
 	}
+}
+
+.attribution {
+	position: absolute;
+	font-size: 12px;
+	bottom: 0;
+	right: 0;
+	padding: 0.5rem 0.5rem;
+	text-align: right;
+	opacity: 0.65;
+	background-color: transparentize($primary-fg, 0.85);
+	color: $primary-fg;
+	border-radius: 5px 0 0 0;
+	// a, a:visited { color: $primary-bg; }
 }
