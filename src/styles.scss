@@ -164,12 +164,16 @@ a:active {
 	}
 }
 
-
 .attribution {
 	position: absolute;
-	bottom: 5px;
 	font-size: 12px;
-	right: 1rem;;
+	bottom: 0;
+	right: 0;
+	padding: 0.5rem 0.5rem;
 	text-align: right;
-	opacity: 0.5;
+	opacity: 0.65;
+	background-color: transparentize($primary-fg, 0.85);
+	color: $primary-fg;
+	border-radius: 5px 0 0 0;
+	// a, a:visited { color: $primary-bg; }
 }
