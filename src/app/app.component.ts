@@ -13,8 +13,8 @@ export class AppComponent {
 	@ViewChild('cd1', {static: false}) private cd1!: CountdownComponent;
 	@ViewChild('cd2', {static: false}) private cd2!: CountdownComponent;
 
-	private clickSound: HTMLAudioElement = new Audio();
-	private alarmSound: HTMLAudioElement = new Audio();
+	private clickSound: HTMLAudioElement = new Audio('../assets/sounds/254316__jagadamba__clock-tick.wav');
+	private alarmSound: HTMLAudioElement = new Audio('../assets/sounds/426888__thisusernameis__beep4.wav');
 
 	// Clock 1 Settings
 	public clock1: any = {
@@ -92,7 +92,7 @@ export class AppComponent {
 		cd2.resume();
 
 		if (this.isSoundEnabled && (clock1.state == "active" || this.isFirstClick)) {
-			this.playClickSound();
+			this.clickSound.play();
 		}
 
 		if (this.isFirstClick) {
@@ -154,20 +154,8 @@ export class AppComponent {
 		console.log(event);
 
 		if (event.action === 'done' && this.isSoundEnabled) {
-			this.playAlarmSound();
+			this.alarmSound.play();
 		}
-	}
-
-	playClickSound() {
-		this.clickSound.src = "../assets/sounds/254316__jagadamba__clock-tick.wav";
-		this.clickSound.load();
-		this.clickSound.play();
-	}
-
-	playAlarmSound() {
-		this.alarmSound.src = "../assets/sounds/426888__thisusernameis__beep4.wav";
-		this.alarmSound.load();
-		this.alarmSound.play();
 	}
 }
 
