@@ -91,7 +91,7 @@ export class AppComponent {
 		cd1.pause();
 		cd2.resume();
 
-		if (this.isSoundEnabled) {
+		if (this.isSoundEnabled && (clock1.state == "active" || this.isFirstClick)) {
 			this.playClickSound();
 		}
 
