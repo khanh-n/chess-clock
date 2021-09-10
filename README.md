@@ -25,3 +25,6 @@ To build/compile:
     npm run build
 
 see Angular docs here: https://angular.io
+
+
+sound effects sourced from: https://freesound.org
