@@ -1,4 +1,3 @@
-import { keyframes } from '@angular/animations';
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdown';
 import presetJson from '../assets/presets.json';
@@ -14,6 +13,8 @@ export class AppComponent {
 	@ViewChild('cd1', {static: false}) private cd1!: CountdownComponent;
 	@ViewChild('cd2', {static: false}) private cd2!: CountdownComponent;
 
+	private clickSound: HTMLAudioElement = new Audio();
+	private alarmSound: HTMLAudioElement = new Audio();
 
 	// Clock 1 Settings
 	public clock1: any = {
@@ -29,12 +30,14 @@ export class AppComponent {
 		startingTimeLeft: 600
 	}
 
-	public dangerZone: number = 21;
+	public isSoundEnabled: boolean = true;
 	public isSynced: boolean = true;
 	public isFirstClick: boolean = true;
 	public selectedPreset: string = "10+0";
 	public moveCount: number = 0;
+	public dangerZone: number = 21;
 	public presets: Array<any> = JSON.parse(JSON.stringify(presetJson));
+
 
 	@HostListener('document:keypress', ['$event'])
 	handleKeyboardEvent(event: KeyboardEvent) {
@@ -84,8 +87,13 @@ export class AppComponent {
 	}
 
 	handleBtn(clock1: any, clock2: any, cd1: CountdownComponent, cd2: CountdownComponent) {
+
 		cd1.pause();
 		cd2.resume();
+
+		if (this.isSoundEnabled) {
+			this.playClickSound();
+		}
 
 		if (this.isFirstClick) {
 			this.isFirstClick = false;
@@ -145,9 +153,21 @@ export class AppComponent {
 	handleEvent(event: CountdownEvent) {
 		console.log(event);
 
-		if (event.action === 'notify') {
-
+		if (event.action === 'done' && this.isSoundEnabled) {
+			this.playAlarmSound();
 		}
+	}
+
+	playClickSound() {
+		this.clickSound.src = "../assets/sounds/254316__jagadamba__clock-tick.wav";
+		this.clickSound.load();
+		this.clickSound.play();
+	}
+
+	playAlarmSound() {
+		this.alarmSound.src = "../assets/sounds/426888__thisusernameis__beep4.wav";
+		this.alarmSound.load();
+		this.alarmSound.play();
 	}
 }
 

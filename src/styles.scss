@@ -1,7 +1,8 @@
 @use '~@angular/material' as mat;
 @import 'material-icons/iconfont/material-icons.css';
 @import 'scss/fonts/lcdbold/font.css';
-@import 'scss/_colors.scss';
+@import 'scss/_colors';
+@import 'scss/forms';
 
 * {
 	transition: all 0.1s;
@@ -87,6 +88,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
 		right: 25px;
 		font-size: 4rem;
 		opacity: 0.45;
+	}
+}
+
+.sound-toggle {
+	margin-top: 0.5rem;
+	margin-left: 1rem;
+
+	span.slider:before {
+		content: "\e04f";
+		font-family: "Material Icons";
+		font-size: 34px;
+		bottom: -8px;
+		background-color: transparent;
+		color: $primary-fg;
+	}
+
+	input:checked+.slider:before {
+		content: "\e050";
+		font-size: 36px;
+		color: $primary-bg;
 	}
 }
 

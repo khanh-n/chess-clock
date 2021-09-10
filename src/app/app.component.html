@@ -18,6 +18,11 @@
 				<mat-icon aria-hidden="false" aria-label="pause" class="control">pause</mat-icon>
 			</button>
 
+			<label class="switch sound-toggle">
+				<input type="checkbox" [(ngModel)]="isSoundEnabled" name="sound-check" />
+				<span class="slider round"></span>
+			</label>
+
 			<!-- <button (click)="onCycleMode()" class="control-btn">
 				<mat-icon aria-hidden="false" aria-label="reset" class="control">forward</mat-icon>
 			</button> -->
