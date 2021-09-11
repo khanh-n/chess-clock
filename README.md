@@ -16,6 +16,11 @@ The clock can also be controlled by keyboard input:
 
 ## Building/Running Angular app
 
+Requirements:
+  - Node & npm: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
+  - Angular CLI: https://angular.io/cli
+
+
 To run locally:
 
     npm run start
