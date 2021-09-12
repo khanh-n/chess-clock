@@ -1,6 +1,7 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdown';
 import presetJson from '../assets/presets.json';
+import { IClock } from './interfaces/clock.interface';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -17,14 +18,14 @@ export class AppComponent {
 	private alarmSound: HTMLAudioElement = new Audio('../assets/sounds/426888__thisusernameis__beep4.wav');
 
 	// Clock 1 Settings
-	public clock1: any = {
+	public clock1: IClock = {
 		state: "paused",
 		increment: 0,
 		startingTimeLeft: 600
 	}
 
 	// Clock 2 Settings
-	public clock2: any = {
+	public clock2: IClock = {
 		state: "paused",
 		increment: 0,
 		startingTimeLeft: 600
