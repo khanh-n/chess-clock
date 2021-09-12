@@ -63,3 +63,37 @@ input:checked+.slider:before {
 .slider.round:before {
 	border-radius: 50%;
 }
+
+.form-field {
+	padding-left: 2rem;
+}
+
+.mat-select-trigger {
+	height: auto !important;
+}
+
+.mat-select-value,
+.mat-select-value-text,
+.mat-option-text,
+.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+	font-size: 1rem;
+}
+
+.mat-form-field-label-wrapper {
+	top: -0.1em;
+}
+
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow,
+.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label,
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+	color: $highlight;
+}
+
+.mat-select-panel .mat-optgroup-label,
+.mat-select-panel .mat-option {
+	height: 2.5rem !important;
+}
+
+.mat-form-field-infix {
+	// width: 200px !important;
+}

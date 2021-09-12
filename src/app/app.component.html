@@ -1,6 +1,6 @@
 <div class="content" role="main" fxLayout="column">
 
-	<div class="controls" fxFlex="25vh" fxLayout="column" fxLayoutAlign="center center">
+	<div class="controls" fxFlex="21vh" fxLayout="column" fxLayoutAlign="center center">
 
 		<div class="time-presets" fxLayout="row wrap">
 			<div  *ngFor="let preset of presets">
@@ -9,8 +9,29 @@
 				</button>
 			</div>
 		</div>
+	</div>
 
-		<div fxLayout="row">
+	<div class="clock-container" fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="35vh">
+		<div id="clock1" class="clock font-{{typeface}} {{clock1.state}} {{cd1.left/1000 < dangerZone ? 'danger': ''}}" (click)="onBtnOne()" fxFlex="47">
+			<span class="increment" *ngIf="clock1.increment != 0">+{{clock1.increment}}</span>
+			<countdown #cd1 [config]="config1" (event)="handleEvent($event)"></countdown>
+		</div>
+
+
+		<div id="clock2" class="clock font-{{typeface}} {{clock2.state}} {{ cd2.left/1000 < dangerZone ? 'danger': ''}}" (click)="onBtnTwo()" fxFlex="47">
+			<span class="increment" *ngIf="clock2.increment != 0">+{{clock2.increment}}</span>
+			<countdown #cd2 [config]="config2" (event)="handleEvent($event)"></countdown>
+		</div>
+	</div>
+
+	<div fxLayout="row" class="moves font-{{typeface}}" fxLayoutAlign="center start">
+		<strong>Moves: {{ moveCount }}</strong>
+	</div>
+
+
+	<div class="controls" fxFlex="25vh" fxLayout="column" fxLayoutAlign="center center">
+		<div fxLayout="row wrap" fxLayoutAlign="center center" class="full-width">
+
 			<button (click)="onReset()" class="control-btn">
 				<mat-icon aria-hidden="false" aria-label="reset" class="control">refresh</mat-icon>
 			</button>
@@ -23,29 +44,20 @@
 				<span class="slider round"></span>
 			</label>
 
-			<!-- <button (click)="onCycleMode()" class="control-btn">
-				<mat-icon aria-hidden="false" aria-label="reset" class="control">forward</mat-icon>
-			</button> -->
+		<!-- <button (click)="onCycleMode()" class="control-btn">
+			<mat-icon aria-hidden="false" aria-label="reset" class="control">forward</mat-icon>
+		</button> -->
+
+			<mat-form-field class="form-field">
+				<mat-label>Clock Font</mat-label>
+				<mat-select [(value)]="typeface">
+					<mat-option value="LCDBOLD">LCD Bold</mat-option>
+					<mat-option value="Roboto">Roboto</mat-option>
+				</mat-select>
+			</mat-form-field>
+
 		</div>
 	</div>
-
-	<div class="clock-container" fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="50vh">
-		<div id="clock1" class="clock {{clock1.state}} {{cd1.left/1000 < dangerZone ? 'danger': ''}}" (click)="onBtnOne()" fxFlex="47">
-			<span class="increment" *ngIf="clock1.increment != 0">+{{clock1.increment}}</span>
-			<countdown #cd1 [config]="config1" (event)="handleEvent($event)"></countdown>
-		</div>
-
-
-		<div id="clock2" class="clock {{clock2.state}} {{ cd2.left/1000 < dangerZone ? 'danger': ''}}" (click)="onBtnTwo()" fxFlex="47">
-			<span class="increment" *ngIf="clock2.increment != 0">+{{clock2.increment}}</span>
-			<countdown #cd2 [config]="config2" (event)="handleEvent($event)"></countdown>
-		</div>
-	</div>
-
-	<div fxLayout="row" class="moves" fxLayoutAlign="center start">
-		<strong>Moves: {{ moveCount }}</strong>
-	</div>
-
 
 </div>
 

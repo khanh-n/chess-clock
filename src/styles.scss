@@ -1,8 +1,9 @@
 @use '~@angular/material' as mat;
 @import 'material-icons/iconfont/material-icons.css';
-@import 'scss/fonts/lcdbold/font.css';
 @import 'scss/_colors';
 @import 'scss/forms';
+@import 'scss/fonts';
+@import 'scss/utilities';
 
 * {
 	transition: all 0.1s;
@@ -49,6 +50,7 @@ a:active {
 		padding: 0.35rem 1rem 0.25rem;
 		margin: 0.5rem;
 		cursor: pointer;
+		max-height: 3rem;
 	}
 	.control-btn:hover,
 	.control-btn.active {
@@ -56,9 +58,12 @@ a:active {
 		color: $primary-bg
 	}
 
+	.select-container {
+		text-align: right;
+	}
+
 }
 .moves {
-	font-family: 'LCDBOLD';
 	font-size: 2rem;
 	padding-top: 2rem;
 }
@@ -68,24 +73,24 @@ a:active {
 
 	.clock {
 		position: relative;
-		font-family: 'LCDBOLD';
 		font-size: 9.21rem;
 		padding-top: 7.21rem;
 		padding-bottom: 7.21rem;
 		cursor: pointer;
-		border-radius: 1.5rem;
+		border-radius: 1rem;
 		background-color: lighten($primary-bg, 10%);
+		box-shadow: 1px 2px 9px 3px darken($primary-bg, 3%);
 		// &:first-child {border-right: 1px solid #fff;}
 	}
 
 	.clock.paused {
 		background-color: lighten($primary-bg, 10%);
-		border: 1px solid lighten($primary-bg, 10%);
+		border: 2px solid lighten($primary-bg, 20%);
 		color: $primary-fg;
 	}
 	.clock.active {
 		background-color: lighten($primary-bg, 15%);
-		border: 1px solid $highlight;
+		border: 2px solid $highlight;
 		color: $highlight;
 	}
 

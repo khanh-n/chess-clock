@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CountdownModule } from 'ngx-countdown';
 
@@ -18,7 +19,8 @@ import { CountdownModule } from 'ngx-countdown';
 		CountdownModule,
 		FormsModule,
 		FlexLayoutModule,
-		MatIconModule
+		MatIconModule,
+		MatSelectModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
