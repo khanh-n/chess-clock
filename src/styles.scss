@@ -45,7 +45,7 @@ a:active {
 	.control-btn {
 		background-color: $primary-bg;
 		color: $primary-fg;
-		border: 1px solid $highlight;
+		border: 2px solid $highlight;
 		border-radius: 15px;
 		padding: 0.35rem 1rem 0.25rem;
 		margin: 0.5rem;
@@ -108,14 +108,13 @@ a:active {
 }
 
 .sound-toggle {
-	margin-top: 0.5rem;
 	margin-left: 1rem;
 
 	span.slider:before {
 		content: "\e04f";
 		font-family: "Material Icons";
 		font-size: 34px;
-		bottom: -8px;
+		bottom: -10px;
 		background-color: transparent;
 		color: $primary-fg;
 	}

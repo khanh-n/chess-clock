@@ -57,7 +57,7 @@ input:checked+.slider:before {
 /* Rounded sliders */
 .slider.round {
 	border-radius: 34px;
-	border: 1px solid $highlight;
+	border: 2px solid $highlight;
 }
 
 .slider.round:before {
