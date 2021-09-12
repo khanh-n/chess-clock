@@ -1,8 +1,9 @@
 @use '~@angular/material' as mat;
 @import 'material-icons/iconfont/material-icons.css';
-@import 'scss/fonts/lcdbold/font.css';
 @import 'scss/_colors';
 @import 'scss/forms';
+@import 'scss/fonts';
+@import 'scss/utilities';
 
 * {
 	transition: all 0.1s;
@@ -49,6 +50,7 @@ a:active {
 		padding: 0.35rem 1rem 0.25rem;
 		margin: 0.5rem;
 		cursor: pointer;
+		max-height: 3rem;
 	}
 	.control-btn:hover,
 	.control-btn.active {
@@ -56,9 +58,12 @@ a:active {
 		color: $primary-bg
 	}
 
+	.select-container {
+		text-align: right;
+	}
+
 }
 .moves {
-	font-family: 'LCDBOLD';
 	font-size: 2rem;
 	padding-top: 2rem;
 }
@@ -68,7 +73,6 @@ a:active {
 
 	.clock {
 		position: relative;
-		font-family: 'LCDBOLD';
 		font-size: 9.21rem;
 		padding-top: 7.21rem;
 		padding-bottom: 7.21rem;

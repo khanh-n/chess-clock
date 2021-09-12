@@ -37,8 +37,8 @@ export class AppComponent {
 	public selectedPreset: string = "10+0";
 	public moveCount: number = 0;
 	public dangerZone: number = 21;
+	public typeface: string = "LCDBOLD";
 	public presets: Array<any> = JSON.parse(JSON.stringify(presetJson));
-
 
 	@HostListener('document:keypress', ['$event'])
 	handleKeyboardEvent(event: KeyboardEvent) {
