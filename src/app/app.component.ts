@@ -1,14 +1,15 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdown';
 import presetJson from '../assets/presets.json';
 import { IClock } from './interfaces/clock.interface';
+import { ISettings } from './interfaces/settings.interface';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 	title = 'chess-clock';
 
 	@ViewChild('cd1', {static: false}) private cd1!: CountdownComponent;
@@ -16,6 +17,13 @@ export class AppComponent {
 
 	private clickSound: HTMLAudioElement = new Audio('../assets/sounds/254316__jagadamba__clock-tick.wav');
 	private alarmSound: HTMLAudioElement = new Audio('../assets/sounds/426888__thisusernameis__beep4.wav');
+
+	public settings: ISettings = {
+		font: "LCDBOLD",
+		isSoundEnabled: true,
+		isSynced: true,
+		selectedPreset: "10+0",
+	};
 
 	// Clock 1 Settings
 	public clock1: IClock = {
@@ -31,14 +39,35 @@ export class AppComponent {
 		startingTimeLeft: 600
 	}
 
-	public isSoundEnabled: boolean = true;
-	public isSynced: boolean = true;
+
+	public isSoundEnabled: boolean = this.settings.isSoundEnabled;
+	public isSynced: boolean = this.settings.isSynced;
 	public isFirstClick: boolean = true;
-	public selectedPreset: string = "10+0";
 	public moveCount: number = 0;
 	public dangerZone: number = 21;
-	public typeface: string = "LCDBOLD";
 	public presets: Array<any> = JSON.parse(JSON.stringify(presetJson));
+
+	constructor() {
+		this.settings = JSON.parse(localStorage.getItem('userSettings') || JSON.stringify(this.settings));
+	}
+
+	ngOnInit() {
+
+	}
+
+	ngAfterViewInit() {
+		if (this.settings.clock1 == null) {
+			this.settings.clock1 = this.clock1;
+		}
+		if (this.settings.clock2 == null) {
+			this.settings.clock2 = this.clock2;
+		}
+
+		this.clock1 = this.settings.clock1;
+		this.clock2 = this.settings.clock2;
+
+		this.onSetTime(this.settings.clock1.startingTimeLeft, this.settings.clock1.increment, this.settings.selectedPreset);
+	}
 
 	@HostListener('document:keypress', ['$event'])
 	handleKeyboardEvent(event: KeyboardEvent) {
@@ -121,8 +150,10 @@ export class AppComponent {
 		this.cd2.config.leftTime = time;
 		this.clock1.startingTimeLeft = time;
 		this.clock2.startingTimeLeft = time;
-		this.selectedPreset = name;
+		this.settings.selectedPreset = name;
 		this.onReset();
+
+		this.onSaveSettings();
 	}
 
 	onPause() {
@@ -144,12 +175,21 @@ export class AppComponent {
 	}
 
 	onCycleMode() {
-		var idx = this.presets.findIndex(p => p.name == this.selectedPreset) + 1;
+		var idx = this.presets.findIndex(p => p.name == this.settings.selectedPreset) + 1;
 		if (idx >= this.presets.length) {
 			idx = 0;
 		}
 
 		this.onSetTime(this.presets[idx].time, this.presets[idx].inc, this.presets[idx].name);
+	}
+
+	onFontChange(event: any) {
+		console.log(event);
+		this.onSaveSettings();
+	}
+
+	onSaveSettings() {
+		localStorage.setItem('userSettings', JSON.stringify(this.settings));
 	}
 
 	handleEvent(event: CountdownEvent) {
