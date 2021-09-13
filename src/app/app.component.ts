@@ -3,6 +3,8 @@ import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdo
 import presetJson from '../assets/presets.json';
 import { IClock } from './interfaces/clock.interface';
 import { ISettings } from './interfaces/settings.interface';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DialogComponent } from './components/dialog/dialog.component';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -46,8 +48,9 @@ export class AppComponent implements OnInit {
 	public moveCount: number = 0;
 	public dangerZone: number = 21;
 	public presets: Array<any> = JSON.parse(JSON.stringify(presetJson));
+	public custom: string = this.settings.selectedPreset;
 
-	constructor() {
+	constructor(public dialog: MatDialog) {
 		this.settings = JSON.parse(localStorage.getItem('userSettings') || JSON.stringify(this.settings));
 	}
 
@@ -66,7 +69,8 @@ export class AppComponent implements OnInit {
 		this.clock1 = this.settings.clock1;
 		this.clock2 = this.settings.clock2;
 
-		this.onSetTime(this.settings.clock1.startingTimeLeft, this.settings.clock1.increment, this.settings.selectedPreset);
+		this.setCustomValue();
+		this.onSetTime(this.settings.clock1.startingTimeLeft, this.settings.clock2.startingTimeLeft, this.settings.clock1.increment, this.settings.clock2.increment, this.settings.selectedPreset);
 	}
 
 	@HostListener('document:keypress', ['$event'])
@@ -108,15 +112,15 @@ export class AppComponent implements OnInit {
 	}
 
 
-	onBtnOne() {
+	onBtnOne(): void {
 		this.handleBtn(this.clock1, this.clock2, this.cd1, this.cd2);
 	}
 
-	onBtnTwo() {
+	onBtnTwo(): void {
 		this.handleBtn(this.clock2, this.clock1, this.cd2, this.cd1);
 	}
 
-	handleBtn(clock1: any, clock2: any, cd1: CountdownComponent, cd2: CountdownComponent) {
+	handleBtn(clock1: any, clock2: any, cd1: CountdownComponent, cd2: CountdownComponent): void {
 
 		cd1.pause();
 		cd2.resume();
@@ -143,27 +147,28 @@ export class AppComponent implements OnInit {
 		clock2.state = "active";
 	}
 
-	onSetTime(time: number, increment: number = 0, name: string = "custom") {
-		this.clock1.increment = increment;
-		this.clock2.increment = increment;
-		this.cd1.config.leftTime = time;
-		this.cd2.config.leftTime = time;
-		this.clock1.startingTimeLeft = time;
-		this.clock2.startingTimeLeft = time;
+	onSetTime(time1: number, time2: number = time1, inc1: number = 0, inc2: number = inc1, name: string = "custom"): void {
+		this.clock1.increment = inc1;
+		this.clock2.increment = inc2;
+		this.cd1.config.leftTime = time1;
+		this.cd2.config.leftTime = time2;
+		this.clock1.startingTimeLeft = time1;
+		this.clock2.startingTimeLeft = time2;
 		this.settings.selectedPreset = name;
 		this.onReset();
 
 		this.onSaveSettings();
+		this.setCustomValue();
 	}
 
-	onPause() {
+	onPause(): void {
 		this.cd1.pause();
 		this.cd2.pause();
 		this.clock1.state = "paused";
 		this.clock2.state = "paused";
 	}
 
-	onReset() {
+	onReset(): void {
 		this.cd1.config.leftTime = this.clock1.startingTimeLeft;
 		this.cd2.config.leftTime = this.clock2.startingTimeLeft;
 		this.cd1.restart();
@@ -174,7 +179,7 @@ export class AppComponent implements OnInit {
 		this.moveCount = 0;
 	}
 
-	onCycleMode() {
+	onCycleMode(): void {
 		var idx = this.presets.findIndex(p => p.name == this.settings.selectedPreset) + 1;
 		if (idx >= this.presets.length) {
 			idx = 0;
@@ -183,16 +188,16 @@ export class AppComponent implements OnInit {
 		this.onSetTime(this.presets[idx].time, this.presets[idx].inc, this.presets[idx].name);
 	}
 
-	onFontChange(event: any) {
+	onFontChange(event: any): void {
 		console.log(event);
 		this.onSaveSettings();
 	}
 
-	onSaveSettings() {
+	onSaveSettings(): void {
 		localStorage.setItem('userSettings', JSON.stringify(this.settings));
 	}
 
-	handleEvent(event: CountdownEvent) {
+	handleEvent(event: CountdownEvent): void {
 		console.log(event);
 
 		if (event.action === 'done' && this.isSoundEnabled) {
@@ -200,5 +205,50 @@ export class AppComponent implements OnInit {
 			this.alarmSound.play();
 		}
 	}
+
+	parseCustomSettings(value: string): void {
+
+		const settings = value.trim().replace(' ', '').split(',');
+		const setting1 = settings[0];
+		const setting2 = settings[1] || setting1;
+
+		const time1 = parseInt(setting1.split('+')[0]) * 60;
+		const inc1 = parseInt(setting1.split('+')[1]);
+
+		const time2 = parseInt(setting2.split('+')[0]) * 60;
+		const inc2 = parseInt(setting2.split('+')[1]);
+
+		this.onSetTime(time1, time2, inc1, inc2, "custom");
+	}
+
+	setCustomValue(): void {
+		if (this.settings.clock1 == null) {
+			this.settings.clock1 = this.clock1;
+		}
+		if (this.settings.clock2 == null) {
+			this.settings.clock2 = this.clock2;
+		}
+
+		let clock1Preset = (this.settings.clock1.startingTimeLeft/60).toString() + "+" + (this.settings.clock1.increment).toString();
+		let clock2Preset = (this.settings.clock2.startingTimeLeft/60).toString() + "+" + (this.settings.clock2.increment).toString();
+
+		this.custom = clock1Preset + "," + clock2Preset;
+	}
+	openDialog(): void {
+		const dialogRef = this.dialog.open(DialogComponent, {
+			width: '250px',
+			data: this.custom
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) {
+				this.custom = result;
+				this.parseCustomSettings(this.custom);
+				this.settings.selectedPreset = "custom";
+				this.onSaveSettings();
+				// console.log(result);
+			}
+		});
+	   }
 }
 

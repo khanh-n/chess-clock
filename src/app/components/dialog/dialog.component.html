@@ -1,0 +1,12 @@
+<div mat-dialog-content>
+	<p>Enter custom setting:</p>
+	<mat-form-field appearance="fill">
+		<mat-label>Time:</mat-label>
+		<input matInput [(ngModel)]="custom">
+	</mat-form-field>
+	<p>ex) <span class="highlight">10+5,30+15</span></p>
+</div>
+<div mat-dialog-actions>
+	<button mat-button (click)="onNoClick()">Cancel</button>
+	<button mat-button [mat-dialog-close]="custom" cdkFocusInitial>Set</button>
+</div>

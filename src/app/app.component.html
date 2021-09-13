@@ -4,8 +4,13 @@
 
 		<div class="time-presets" fxLayout="row wrap">
 			<div  *ngFor="let preset of presets">
-				<button (click)="onSetTime(preset.time, preset.inc, preset.name)" class="control-btn {{settings.selectedPreset == preset.name ? 'active' : ''}}">
+				<button (click)="onSetTime(preset.time, preset.time, preset.inc, preset.inc, preset.name)" class="control-btn {{settings.selectedPreset == preset.name ? 'active' : ''}}">
 					<span class="control">{{preset.name}}</span>
+				</button>
+			</div>
+			<div>
+				<button (click)="openDialog()" class="control-btn {{settings.selectedPreset == 'custom' ? 'active' : ''}}">
+					<span class="control">custom</span>
 				</button>
 			</div>
 		</div>
@@ -49,7 +54,7 @@
 		</button> -->
 
 			<mat-form-field class="form-field">
-				<mat-label>Clock Font</mat-label>
+				<mat-label class="custom">Clock Font</mat-label>
 				<mat-select [(value)]="settings.font" (selectionChange)="onFontChange($event)">
 					<mat-option value="LCDBOLD">LCD Bold</mat-option>
 					<mat-option value="Roboto">Roboto</mat-option>
