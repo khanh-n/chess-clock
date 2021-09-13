@@ -79,7 +79,7 @@ input:checked+.slider:before {
 	font-size: 1rem;
 }
 
-.mat-form-field-label-wrapper {
+.mat-form-field-label-wrapper.custom {
 	top: -0.1em;
 }
 
@@ -97,3 +97,7 @@ input:checked+.slider:before {
 .mat-form-field-infix {
 	// width: 200px !important;
 }
+
+.mat-input-element {
+	caret-color: $highlight;
+ }

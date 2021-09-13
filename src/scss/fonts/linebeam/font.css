@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'linear_beam';
+    src: url('linebeam-webfont.woff2') format('woff2'),
+         url('linebeam-webfont.woff') format('woff'),
+	    url('linebeam.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
