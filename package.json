@@ -1,6 +1,6 @@
 {
   "name": "chess-clock",
-  "version": "0.0.1",
+  "version": "0.9.1",
   "scripts": {
     "ng": "ng",
     "clean": "rimraf ./dist",
