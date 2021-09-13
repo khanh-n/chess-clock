@@ -40,8 +40,6 @@ export class AppComponent implements OnInit {
 		startingTimeLeft: 600
 	}
 
-
-	public isSoundEnabled: boolean = this.settings.isSoundEnabled;
 	public isFirstClick: boolean = true;
 	public moveCount: number = 0;
 	public dangerZone: number = 21;
@@ -123,7 +121,7 @@ export class AppComponent implements OnInit {
 		cd1.pause();
 		cd2.resume();
 
-		if (this.isSoundEnabled && (clock1.state == "active" || this.isFirstClick)) {
+		if (this.settings.isSoundEnabled && (clock1.state == "active" || this.isFirstClick)) {
 			this.clickSound.load();
 			this.clickSound.play();
 		}
@@ -198,7 +196,7 @@ export class AppComponent implements OnInit {
 	handleEvent(event: CountdownEvent): void {
 		console.log(event);
 
-		if (event.action === 'done' && this.isSoundEnabled) {
+		if (event.action === 'done' && this.settings.isSoundEnabled) {
 			this.alarmSound.load();
 			this.alarmSound.play();
 		}
