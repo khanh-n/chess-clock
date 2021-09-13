@@ -3,7 +3,7 @@ import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdo
 import presetJson from '../assets/presets.json';
 import { IClock } from './interfaces/clock.interface';
 import { ISettings } from './interfaces/settings.interface';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './components/dialog/dialog.component';
 @Component({
 	selector: 'app-root',
@@ -25,34 +25,39 @@ export class AppComponent implements OnInit {
 		isSoundEnabled: true,
 		selectedPreset: "10+0",
 	};
-
-	// Clock 1 Settings
 	public clock1: IClock = {
 		state: "paused",
 		increment: 0,
 		startingTimeLeft: 600
 	}
-
-	// Clock 2 Settings
 	public clock2: IClock = {
 		state: "paused",
 		increment: 0,
 		startingTimeLeft: 600
 	}
-
 	public isFirstClick: boolean = true;
 	public moveCount: number = 0;
 	public dangerZone: number = 21;
 	public presets: Array<any> = JSON.parse(JSON.stringify(presetJson));
 	public custom: string = this.settings.selectedPreset;
+	public config1: CountdownConfig = {
+		demand: true,
+		leftTime: this.clock1.startingTimeLeft,
+		format: 'mm:ss',
+		notify: this.dangerZone - 1
+	}
+	public config2: CountdownConfig = {
+		demand: true,
+		leftTime: this.clock2.startingTimeLeft,
+		format: 'mm:ss',
+		notify: this.dangerZone - 1
+	}
 
 	constructor(public dialog: MatDialog) {
 		this.settings = JSON.parse(localStorage.getItem('userSettings') || JSON.stringify(this.settings));
 	}
 
-	ngOnInit() {
-
-	}
+	ngOnInit() {}
 
 	ngAfterViewInit() {
 		if (this.settings.clock1 == null) {
@@ -93,20 +98,6 @@ export class AppComponent implements OnInit {
 			this.onCycleMode();
 		}
 	}
-
-	public config1: CountdownConfig = {
-		demand: true,
-		leftTime: this.clock1.startingTimeLeft,
-		format: 'mm:ss',
-		notify: this.dangerZone - 1
-	}
-	public config2: CountdownConfig = {
-		demand: true,
-		leftTime: this.clock2.startingTimeLeft,
-		format: 'mm:ss',
-		notify: this.dangerZone - 1
-	}
-
 
 	onBtnOne(): void {
 		this.handleBtn(this.clock1, this.clock2, this.cd1, this.cd2);
@@ -176,7 +167,7 @@ export class AppComponent implements OnInit {
 	}
 
 	onCycleMode(): void {
-		var idx = this.presets.findIndex(p => p.name == this.settings.selectedPreset) + 1;
+		let idx = this.presets.findIndex(p => p.name == this.settings.selectedPreset) + 1;
 		if (idx >= this.presets.length) {
 			idx = 0;
 		}
@@ -230,6 +221,7 @@ export class AppComponent implements OnInit {
 
 		this.custom = clock1Preset + "," + clock2Preset;
 	}
+
 	openDialog(): void {
 		const dialogRef = this.dialog.open(DialogComponent, {
 			width: '250px',
@@ -245,6 +237,6 @@ export class AppComponent implements OnInit {
 				// console.log(result);
 			}
 		});
-	   }
+	}
 }
 
