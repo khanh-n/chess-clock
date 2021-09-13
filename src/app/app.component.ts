@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
 	public settings: ISettings = {
 		font: "LCDBOLD",
 		isSoundEnabled: true,
-		isSynced: true,
 		selectedPreset: "10+0",
 	};
 
@@ -43,7 +42,6 @@ export class AppComponent implements OnInit {
 
 
 	public isSoundEnabled: boolean = this.settings.isSoundEnabled;
-	public isSynced: boolean = this.settings.isSynced;
 	public isFirstClick: boolean = true;
 	public moveCount: number = 0;
 	public dangerZone: number = 21;
