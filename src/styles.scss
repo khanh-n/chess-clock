@@ -126,6 +126,16 @@ a:active {
 	}
 }
 
+@media only screen and (max-width: 1024px) {
+	.clock-container {
+		.clock {
+			font-size: 6rem;
+			padding-top: 5rem;
+			padding-bottom: 5rem;
+		}
+	}
+}
+
 @media only screen and (max-width: 769px) {
 	.clock-container {
 		.clock {
