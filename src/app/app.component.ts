@@ -167,12 +167,12 @@ export class AppComponent implements OnInit {
 	}
 
 	onCycleMode(): void {
-		let idx = this.presets.findIndex(p => p.name == this.settings.selectedPreset) + 1;
+		let idx = this.presets.findIndex(p => p.name == this.settings.selectedPreset) + 1 || 0;
 		if (idx >= this.presets.length) {
 			idx = 0;
 		}
 
-		this.onSetTime(this.presets[idx].time, this.presets[idx].inc, this.presets[idx].name);
+		this.onSetTime(this.presets[idx].time, this.presets[idx].time, this.presets[idx].inc, this.presets[idx].inc, this.presets[idx].name);
 	}
 
 	onFontChange(event: any): void {
