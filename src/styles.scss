@@ -74,13 +74,17 @@ a:active {
 	.clock {
 		position: relative;
 		font-size: 9.21rem;
-		padding-top: 7.21rem;
+		padding-top: 8.21rem;
 		padding-bottom: 7.21rem;
 		cursor: pointer;
 		border-radius: 1rem;
 		background-color: lighten($primary-bg, 10%);
 		box-shadow: 1px 2px 9px 3px darken($primary-bg, 3%);
 		// &:first-child {border-right: 1px solid #fff;}
+		.time-item:nth-child(2) {
+			opacity: 0;
+			font-size: 5rem;
+		}
 	}
 
 	.clock.paused {
@@ -96,6 +100,12 @@ a:active {
 
 	.clock.active.danger {
 		color: $danger;
+	}
+
+	.clock.show-decimal {
+		.time-item:nth-child(2) {
+			opacity: 1;
+		}
 	}
 
 	.increment {
@@ -130,8 +140,11 @@ a:active {
 	.clock-container {
 		.clock {
 			font-size: 6rem;
-			padding-top: 5rem;
+			padding-top: 6rem;
 			padding-bottom: 5rem;
+			.time-item:nth-child(2) {
+				font-size: 3rem;
+			}
 		}
 	}
 }
@@ -140,8 +153,9 @@ a:active {
 	.clock-container {
 		.clock {
 			font-size: 5.21rem;
-			padding-top: 5rem;
-			padding-bottom: 5rem;
+			.time-item:nth-child(2) {
+				font-size: 3rem;
+			}
 		}
 
 		.increment {
@@ -156,8 +170,11 @@ a:active {
 	.clock-container {
 		.clock {
 			font-size: 3.5rem;
-			padding-top: 2.5rem;
+			padding-top: 3.5rem;
 			padding-bottom: 2.5rem;
+			.time-item:nth-child(2) {
+				font-size: 1.5rem;
+			}
 		}
 		.increment {
 			top: 5px;

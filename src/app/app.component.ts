@@ -38,19 +38,30 @@ export class AppComponent implements OnInit {
 	public isFirstClick: boolean = true;
 	public moveCount: number = 0;
 	public dangerZone: number = 21;
+	public showDecimalAt: number = 11;
 	public presets: Array<any> = JSON.parse(JSON.stringify(presetJson));
 	public custom: string = this.settings.selectedPreset;
 	public config1: CountdownConfig = {
 		demand: true,
 		leftTime: this.clock1.startingTimeLeft,
-		format: 'mm:ss',
-		notify: this.dangerZone - 1
+		format: 'mm:ss.S',
+		notify: [this.dangerZone - 1, this.showDecimalAt - 1],
+		prettyText: (text) => {
+			return text.split('.')
+			.map((value) => `<span class="time-item">${value}</span>`)
+			.join('');
+		}
 	}
 	public config2: CountdownConfig = {
 		demand: true,
 		leftTime: this.clock2.startingTimeLeft,
-		format: 'mm:ss',
-		notify: this.dangerZone - 1
+		format: 'mm:ss.S',
+		notify: [this.dangerZone - 1, this.showDecimalAt - 1],
+		prettyText: (text) => {
+			return text.split('.')
+			.map((value) => `<span class="time-item">${value}</span>`)
+			.join('');
+		}
 	}
 
 	constructor(public dialog: MatDialog) {
@@ -76,7 +87,6 @@ export class AppComponent implements OnInit {
 
 	@HostListener('document:keypress', ['$event'])
 	handleKeyboardEvent(event: KeyboardEvent) {
-		console.log(event);
 
 		if (event.key == '1') {
 			this.onBtnOne();
@@ -176,7 +186,6 @@ export class AppComponent implements OnInit {
 	}
 
 	onFontChange(event: any): void {
-		console.log(event);
 		this.onSaveSettings();
 	}
 
@@ -185,7 +194,6 @@ export class AppComponent implements OnInit {
 	}
 
 	handleEvent(event: CountdownEvent): void {
-		console.log(event);
 
 		if (event.action === 'done' && this.settings.isSoundEnabled) {
 			this.alarmSound.load();
@@ -234,7 +242,6 @@ export class AppComponent implements OnInit {
 				this.parseCustomSettings(this.custom);
 				this.settings.selectedPreset = "custom";
 				this.onSaveSettings();
-				// console.log(result);
 			}
 		});
 	}
