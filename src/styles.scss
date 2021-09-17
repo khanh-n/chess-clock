@@ -76,11 +76,11 @@ a:active {
 		font-size: 9.21rem;
 		padding-top: 8.21rem;
 		padding-bottom: 7.21rem;
+		padding-left: 2rem;
 		cursor: pointer;
 		border-radius: 1rem;
 		background-color: lighten($primary-bg, 10%);
 		box-shadow: 1px 2px 9px 3px darken($primary-bg, 3%);
-
 		.time-item:nth-child(2) {
 			opacity: 0;
 			visibility: hidden;
@@ -178,6 +178,7 @@ a:active {
 			font-size: 3.5rem;
 			padding-top: 3.5rem;
 			padding-bottom: 2.5rem;
+			padding-left: 1rem;
 			.time-item:nth-child(2) {
 				font-size: 1.5rem;
 			}
