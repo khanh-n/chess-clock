@@ -38,14 +38,15 @@ a:active {
 	text-align: center;
 
 	.time-presets {
-		width: 50vw;
-		display: grid;
-		gap: 0.5em;
-		grid-template-columns: repeat(6, minmax(0, 1fr));
+		width: 40vw;
+		> div {
+			display: inline-block;
+			margin: 0.5rem;
+		}
 	}
 
 	.settings {
-		width: 30vw;
+		width: 35vw;
 		display: grid;
 		grid-auto-flow: column;
 		gap: 1rem;
@@ -68,7 +69,6 @@ a:active {
 		border-radius: 15px;
 		padding: 0.35rem 1rem 0.35rem;
 		cursor: pointer;
-		width: 100%;
 		outline: 0;
 	}
 	.control-btn:hover,
@@ -93,7 +93,7 @@ a:active {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 2rem;
-	padding: 2rem;
+	padding: 1.5rem;
 	text-align: center;
 
 	.clock {
@@ -188,6 +188,8 @@ a:active {
 
 @media only screen and (max-width: 769px) {
 	.clock-container {
+		padding: 1rem;
+		gap: 1rem;
 		.clock {
 			font-size: 5.21rem;
 			.time-item:nth-child(2) {
@@ -211,6 +213,8 @@ a:active {
 
 @media only screen and (max-width: 480px) {
 	.clock-container {
+		padding: 0.5rem;
+		gap: 0.5rem;
 		.clock {
 			font-size: 3.5rem;
 			padding-top: 3.5rem;
