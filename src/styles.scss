@@ -115,6 +115,11 @@ a:active {
 			content: ".";
 			letter-spacing: 0.35rem;
 		}
+
+		.count-down,
+		.increment {
+			pointer-events: none;
+		}
 	}
 
 	.clock.paused {
